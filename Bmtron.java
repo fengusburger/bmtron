@@ -4,7 +4,7 @@ import java.awt.event.*;
 import javax.sound.sampled.*;
 import java.util.Arrays;
 import javax.imageio.ImageIO;
-class BmtronV2 extends JPanel implements ActionListener, KeyListener, MouseListener
+class Bmtron extends JPanel implements ActionListener, KeyListener, MouseListener
 {
     Timer timer = new Timer(15, this);
     
