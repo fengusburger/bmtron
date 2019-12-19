@@ -8,7 +8,7 @@ public class main
         frame.setSize(1090, 710);
         
         //Game
-        BmtronV2 tron = new BmtronV2();
+        Bmtron tron = new Bmtron();
         frame.add(tron);
         frame.addKeyListener(tron);
         tron.addMouseListener(tron);
