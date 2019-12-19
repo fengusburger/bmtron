@@ -28,10 +28,10 @@ class BmtronV2 extends JPanel implements ActionListener, KeyListener, MouseListe
     boolean ready = false;
     Image explosion;
     AudioInputStream audio;
-    //designcrapxd
+    //design stuff
     Font title = new Font("Garamond", Font.BOLD, 30);
     Font font = new Font("Garamond", Font.PLAIN, 12);
-    public void setup()//sets up images and background mussiqq and st00f
+    public void setup()//sets up images and audio clips
     {
         if (!ready)
         {
@@ -41,12 +41,6 @@ class BmtronV2 extends JPanel implements ActionListener, KeyListener, MouseListe
                 explosion = ImageIO.read(getClass().getResource("explosion.png"));
                 
                 audio = AudioSystem.getAudioInputStream(this.getClass().getResource("explosion.wav"));
-                
-                AudioInputStream audio1 = AudioSystem.getAudioInputStream(this.getClass().getResource("movecirculation.wav"));
-                Clip clip1 = AudioSystem.getClip();
-                clip1.open(audio1);
-                clip1.start();
-                clip1.loop(Clip.LOOP_CONTINUOUSLY);
             }
             catch (Exception e){}
         }
@@ -197,36 +191,7 @@ class BmtronV2 extends JPanel implements ActionListener, KeyListener, MouseListe
                 }
             }
         }
-        /*
-        for (int i = 0; i < alive.length; i++)//draw face
-        {
-            try
-            {
-                int p = x[i][x[i].length - 1];
-                int oo = y[i][y[i].length - 1];
-                int pt = tp * 4;
-                switch (direction2[i])
-                {
-                    case "up":
-                        oo += pt;
-                        break;
-                    case "left":
-                        p += pt;
-                        break;
-                    case "down":
-                        oo -= pt;
-                        break;
-                    case "right":
-                        p -= pt;
-                        break;
-                }
-                g.drawImage(eyes,
-                p, oo, p + 20, oo + 20,
-                0, 0, 178, 178,
-                this);
-            }
-            catch (Exception e){}
-        }*/
+        
         for (int i = 0; i < alive.length; i++)
         {
             if (!alive[i])
