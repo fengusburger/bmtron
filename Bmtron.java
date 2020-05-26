@@ -9,7 +9,7 @@ class Bmtron extends JPanel implements ActionListener, KeyListener, MouseListene
     Timer timer = new Timer(15, this);
     
     //5 frames per block
-    int tp = 5;
+    int framesLeft = 5;
     //delay between end round and start round
     int delay = 30;
     
@@ -175,19 +175,19 @@ class Bmtron extends JPanel implements ActionListener, KeyListener, MouseListene
                 //5 frames per block
                 if (direction2[i].equals("up"))
                 {
-                    g.fillRect(tx, ty + (tp * 4), 20, 20 - (tp * 4));
+                    g.fillRect(tx, ty + (framesLeft * 4), 20, 20 - (framesLeft * 4));
                 }
                 else if (direction2[i].equals("left"))
                 {
-                    g.fillRect(tx + (tp * 4), ty, 20 - (tp * 4), 20);
+                    g.fillRect(tx + (framesLeft * 4), ty, 20 - (framesLeft * 4), 20);
                 }
                 else if (direction2[i].equals("down"))
                 {
-                    g.fillRect(tx, ty, 20, 20 - (tp * 4));
+                    g.fillRect(tx, ty, 20, 20 - (framesLeft * 4));
                 }
                 else if (direction2[i].equals("right"))
                 {
-                    g.fillRect(tx, ty, 20 - (tp * 4), 20);
+                    g.fillRect(tx, ty, 20 - (framesLeft * 4), 20);
                 }
             }
         }
@@ -272,12 +272,12 @@ class Bmtron extends JPanel implements ActionListener, KeyListener, MouseListene
     public void actionPerformed(ActionEvent e)
     {
         //everybody pick direction first
-        boolean ok = true;
+        boolean initialDirectionPicked = true;
         for (String direction : direction)
         {
             if (direction.equals("none"))
             {
-                ok = false;
+                initialDirectionPicked = false;
             }
         }
         //new block
@@ -286,7 +286,7 @@ class Bmtron extends JPanel implements ActionListener, KeyListener, MouseListene
             int xx = x[i][x[i].length - 1];
             int yy = y[i][y[i].length - 1];
 
-            if (alive[i] && ok && delay == 30 && tp == 0)//prevent movement if not all players move and if in end and if instructions still up
+            if (alive[i] && initialDirectionPicked && delay == 30 && framesLeft == 0)//prevent movement if not all players move and if in end and if instructions still up
             {
                 switch (direction[i])//create new blocks
                 {
@@ -350,7 +350,7 @@ class Bmtron extends JPanel implements ActionListener, KeyListener, MouseListene
                 score[survivor]++;
             }
             delay = 30;
-            tp = 5;
+            framesLeft = 5;
             counter = numberOfPlayers;
             survivor = -1;
             alive = new boolean[0];
@@ -366,13 +366,13 @@ class Bmtron extends JPanel implements ActionListener, KeyListener, MouseListene
             }
         }
         
-        if (tp == 0 && counter > 1) tp = 5;//when tp = 0 new block formed (tp for frames per block)
+        if (framesLeft == 0 && counter > 1) framesLeft = 5;//when framesLeft = 0 new block formed (framesLeft for frames per block)
         if (counter <= 1)//after number of alive players is 1 or 0, delay to see end result
         {
             delay--;
-            tp = 0;
+            framesLeft = 0;
         }
-        else if (ok) tp--;
+        else if (initialDirectionPicked) framesLeft--;
         
         repaint();
     }
